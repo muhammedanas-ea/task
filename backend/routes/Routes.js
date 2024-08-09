@@ -1,9 +1,11 @@
-import express from "express"
-import {AddserviceDetails} from "../controller/adminController.js"
-const Routes = express.Router()
+import express from "express";
+import {
+  AddserviceDetails,
+  serviceDetails,
+} from "../controller/adminController.js";
+const Routes = express.Router();
 
+Routes.post("/addservices", AddserviceDetails);
+Routes.get("/services", serviceDetails);
 
-
-Routes.post("/addservices",AddserviceDetails)
-
-export default Routes
+export default Routes;
