@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Baloo+2:wght@400..800&display=swap");
+@import url(https://db.onlinewebfonts.com/c/ca671f001f1c1ac07ba12ef439e7e65a?family=Simplon+Norm);
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,8 +10,14 @@
 }
 
 body {
-  font-family: "Baloo 2", sans-serif;
+   font-family: "Simplon Norm";
   background: #f6f6f7;
+}
+.container{
+  padding: 0px 60px;
+}
+.bg-image{
+  background-image: url("https://images.unsplash.com/photo-1509600110300-21b9d5fedeb7?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
 }
 
 @layer base {
