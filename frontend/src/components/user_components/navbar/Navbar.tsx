@@ -3,7 +3,7 @@ import SocialMedia from "../common/SocialMedia";
 
 const Navbar = () => {
   return (
-    <div className="z-50 bg-white sticky top-0 left-0 right-0">
+    <div className="z-50 bg-white sticky top-0 left-0 right-0 shadow-md">
       <header className="flex cursor-pointer  text-black items-center mx-auto max-w-screen-xl container justify-between h-[5rem]">
         <div className="w-[56px] h-[63px]">
           <img

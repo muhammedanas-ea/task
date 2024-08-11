@@ -1,4 +1,35 @@
+import { motion, useInView } from "framer-motion";
+import React from "react";
+
 const Home = () => {
+  const ref1 = React.useRef(null);
+  const ref2 = React.useRef(null);
+  const ref3 = React.useRef(null);
+  const ref4 = React.useRef(null);
+  const ref5 = React.useRef(null);
+  const isInView1 = useInView(ref1, { once: true });
+  const isInView2 = useInView(ref2, { once: true });
+  const isInView3 = useInView(ref3, { once: true });
+  const isInView4 = useInView(ref4, { once: true });
+  const isInView5 = useInView(ref5, { once: true });
+
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.25,
+      },
+    },
+  };
+
+  const gridSqureVariants = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+    },
+  };
+
   const servicesData = [
     {
       imgSrc:
@@ -34,18 +65,29 @@ const Home = () => {
   return (
     <>
       <section className="relative pt-24 bg-cover bg-center bg-no-repeat h-screen bg-image">
-        <div className="absolute inset-0 bg-black bg-opacity-40"></div>
-        <div className="relative px-12 mx-auto max-w-7xl">
-          <div className="w-full mx-auto text-left md:w-11/12 xl:w-9/12 md:text-center flex flex-col justify-center items-center">
-            <h1 className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-white md:text-6xl md:tracking-tight">
+        <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+        <div className="relative flex items-center justify-center h-full px-12 mx-auto max-w-7xl">
+          <div className="text-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 1.9 }}
+              className="mb-8 text-4xl font-extrabold leading-none tracking-normal text-white md:text-6xl md:tracking-tight"
+            >
               <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">
-                Alnaqsh Pools and Contracting W.L.L.
+                Alnaqsh Pools and Contracting <br /> W.L.L.
               </span>
-            </h1>
-            <p className="px-0 mb-8 text-lg text-gray-100 md:text-xl lg:px-24">
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.5 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 2 }}
+              className="px-0 mb-8 text-lg  text-gray-100 md:text-xl lg:px-24"
+            >
               From consulting and strategy development to implementation and
-              support, our comprehensive services can help your business thrive.
-            </p>
+              support, <br /> our comprehensive services can help your business
+              thrive.
+            </motion.div>
             <div className="mb-4 space-x-0 md:space-x-2 md:mb-8">
               <a
                 href="#_"
@@ -70,14 +112,22 @@ const Home = () => {
         </div>
       </section>
 
-      <div className="container mx-auto mt-16  text-black ">
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12">
-          <div>
+      <div className="container mx-auto mt-16 text-black">
+        <div
+          ref={ref4}
+          className="grid grid-cols-1 md:grid-cols-2 items-center gap-12"
+        >
+          <motion.div
+            initial={{ opacity: 0, x: -90 }}
+            animate={isInView4 ? { opacity: 1, x: 0 } : { opacity: 0, x: -90 }}
+            transition={{ duration: 1.9 }}
+          >
             <h1 className="text-5xl font-extrabold tracking-wide leading-tight">
               <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">
                 About us
-              </span>{" "}
+              </span>
             </h1>
+
             <p className="mt-6 text-lg leading-relaxed">
               We create exceptional experiences through innovative solutions for
               swimming pools, infrastructure piping, sports flooring,
@@ -85,22 +135,38 @@ const Home = () => {
               sauna, steam room, jacuzzi, plunge pool, ice bath, and ice
               fountain.
             </p>
-          </div>
-          <div className="flex justify-center">
+          </motion.div>
+
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={
+              isInView4 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }
+            }
+            transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
+          >
             <img
-              className="rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out"
+              className="rounded-lg shadow-md"
               src="https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=861,h=661,fit=crop/m7V8PnDoX2ur9GvK/generated/generated-YBgpxBEbl3U5vDoD.png"
               alt="About Us"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
-      <div className="container mx-auto px-6 py-20 mt-14">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12">
+
+      <div className="container mx-auto my-32">
+        <motion.div
+          ref={ref1}
+          variants={container}
+          initial="hidden"
+          animate={isInView1 ? "show" : "hidden"}
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12"
+        >
           {servicesData.map((items, index) => (
-            <div
-              className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out"
+            <motion.div
+              variants={gridSqureVariants}
               key={index}
+              className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out"
             >
               <img
                 className="w-full h-64 object-cover"
@@ -112,48 +178,76 @@ const Home = () => {
                   {items.title}
                 </h1>
               </div>
-            </div>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
-      <div className="container mx-auto mt-16  text-black ">
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12">
-          <div>
+      <div className="container mx-auto mt-16 text-black">
+        <div
+          ref={ref2}
+          className="grid grid-cols-1 md:grid-cols-2 items-center gap-12"
+        >
+          <motion.div
+            initial={{ opacity: 0, x: -90 }}
+            animate={isInView2 ? { opacity: 1, x: 0 } : { opacity: 0, x: -90 }}
+            transition={{ duration: 1.9 }}
+          >
             <h1 className="text-5xl font-extrabold tracking-wide leading-tight">
               <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">
                 Swimming Pools
-              </span>{" "}
+              </span>
             </h1>
             <p className="mt-6 text-lg leading-relaxed">
               Explore our portfolio of stunning swimming pool projects,
               showcasing our expertise in creating luxurious and functional
               aquatic spaces.
             </p>
-          </div>
-          <div className="flex justify-center">
-            <img
+          </motion.div>
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={
+              isInView2 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }
+            }
+            transition={{ duration: 0.8, delay: 0.7 }}
+          >
+            <motion.img
               className="rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out"
               src="https://images.unsplash.com/photo-1574744918163-6cef6f4a31b0?ixid=M3wzOTE5Mjl8MHwxfHNlYXJjaHw2fHxzd2ltbWluZ3xlbnwwfHx8fDE2OTY3NjA1MzV8MA&ixlib=rb-4.0.3&auto=format&fit=crop&w=703&h=495"
               alt="About Us"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
-      <div className="container mx-auto mt-16  text-black ">
-        <div className="grid grid-cols-1 md:grid-cols-2 items-center gap-12">
-          <div className="flex justify-center">
+      <div className="container mx-auto mt-16 text-black">
+        <div
+          ref={ref3}
+          className="grid grid-cols-1 md:grid-cols-2 items-center gap-12"
+        >
+          <motion.div
+            className="flex justify-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={
+              isInView3 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }
+            }
+            transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
+          >
             <img
               className="rounded-lg shadow-md transform hover:scale-105 transition-transform duration-300 ease-in-out"
               src="https://images.unsplash.com/photo-1622015663319-e97e697503ee?auto=format&fit=crop&w=709&h=435"
               alt="About Us"
             />
-          </div>
-          <div>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, x: 90 }}
+            animate={isInView3 ? { opacity: 1, x: 0 } : { opacity: 0, x: 90 }}
+            transition={{ duration: 1.9, delay: 0.5, ease: "easeOut" }}
+          >
             <h1 className="text-5xl font-extrabold tracking-wide leading-tight">
               <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">
                 Transforming Outdoor Spaces Through Exceptional Landscaping
-              </span>{" "}
+              </span>
             </h1>
             <p className="mt-6 text-lg leading-relaxed">
               Welcome to our world of landscaping, where we merge the beauty of
@@ -163,11 +257,18 @@ const Home = () => {
               exceptional landscaping projects and let us show you the artistry
               and craftsmanship that can transform your outdoor environment.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
-      <div className="container  my-12 grid grid-cols-1 md:grid-cols-2 items-center gap-12">
-        <div>
+      <div
+        ref={ref5}
+        className="container  my-12 grid grid-cols-1 md:grid-cols-2 items-center gap-12"
+      >
+        <motion.div
+          initial={{ opacity: 0, x: -90 }}
+          animate={isInView5 ? { opacity: 1, x: 0 } : { opacity: 0, x: -90 }}
+          transition={{ duration: 1.9 }}
+        >
           <h1 className="text-4xl font-extrabold text-gray-900">
             {" "}
             <span className="block w-full py-2 text-transparent bg-clip-text leading-12 bg-gradient-to-r from-green-400 to-purple-500 lg:inline">
@@ -220,14 +321,21 @@ const Home = () => {
               Submit
             </button>
           </form>
-        </div>
-        <div>
+        </motion.div>
+        <motion.div
+          className="flex justify-center"
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={
+            isInView5 ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.9 }
+          }
+          transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
+        >
           <img
             className="w-full h-auto rounded-lg shadow-lg"
             src="https://images.unsplash.com/photo-1593055497705-59a84c5928b2?ixid=M3wzOTE5Mjl8MHwxfHNlYXJjaHw3fHxzd2ltbWluZ3xlbnwwfHx8fDE2OTY3NjA1MzV8MA&ixlib=rb-4.0.3&auto=format&fit=crop&w=606&h=584"
             alt="Contact Us Image"
           />
-        </div>
+        </motion.div>
       </div>
     </>
   );

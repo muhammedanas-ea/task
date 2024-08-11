@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -13,11 +14,17 @@ import { useFormik } from "formik";
 import { addServiceApi } from "@/api/Route";
 import { valuesProps } from "./type";
 
-export function AddServices() {
-  const initialValues:valuesProps  = {
+interface AddServicesProps {
+  onServiceAdded: () => void; 
+}
+
+export function AddServices({ onServiceAdded }: AddServicesProps) {
+  const [open, setOpen] = useState(false);
+
+  const initialValues: valuesProps = {
     name: "",
     description: "",
-    image: null, 
+    image: null,
   };
 
   const {
@@ -27,11 +34,12 @@ export function AddServices() {
     handleBlur,
     handleSubmit,
     handleChange,
-    setFieldValue, 
+    setFieldValue,
+    resetForm,
   } = useFormik({
     initialValues: initialValues,
     validationSchema: AddServicesSchema,
-    onSubmit: async (values:valuesProps) => {
+    onSubmit: async (values: valuesProps) => {
       try {
         const formData = new FormData();
         formData.append("name", values.name);
@@ -41,7 +49,11 @@ export function AddServices() {
         }
 
         const response = await addServiceApi(formData);
-        console.log(response);
+        if (response?.data?.success) {
+          resetForm();
+          onServiceAdded();
+          setOpen(false);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -49,14 +61,18 @@ export function AddServices() {
   });
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.currentTarget.files?.[0]; 
+    const file = event.currentTarget.files?.[0];
     setFieldValue("image", file);
   };
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button variant="default" className="bg-black hover:bg-black">
+        <Button
+          variant="default"
+          className="bg-black hover:bg-black"
+          onClick={() => setOpen(true)}
+        >
           Add service
         </Button>
       </DialogTrigger>
@@ -65,7 +81,8 @@ export function AddServices() {
           <DialogHeader>
             <DialogTitle>Add Service</DialogTitle>
             <DialogDescription>
-              Fill in the details below to add a new service. Click save when you're done.
+              Fill in the details below to add a new service. Click save when
+              you're done.
             </DialogDescription>
           </DialogHeader>
           <div className="grid gap-4 py-4">

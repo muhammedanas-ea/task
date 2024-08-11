@@ -15,7 +15,7 @@ const AdminLayout = () => {
       <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       <div className="flex-1 flex flex-col">
         <Navbar toggleSidebar={toggleSidebar} />
-        <div className="p-6">
+        <div className="p-6 overflow-y-scroll">
           <Outlet />
         </div>
       </div>
