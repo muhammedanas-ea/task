@@ -57,7 +57,7 @@ const Services = () => {
         {servicesData.map((service, index) => (
           <ServiceCard
             key={index}
-            imgSrc={service.image_url} 
+            imgSrc={service.image} 
             title={service.service_name}
             description={service.description}
           />

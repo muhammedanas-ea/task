@@ -1,6 +1,6 @@
 export interface serviceCardProps {
     imgSrc?: string;
-    image_url?: string;
+    image?: string;
     title?: string;
     service_name?: string;
     description?: string;

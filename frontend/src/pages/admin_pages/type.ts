@@ -1,5 +1,5 @@
 export interface ServiceProps {
-    id: number;
+    _id: number;
     name: string;
     service_name?:string
     description?: string;
